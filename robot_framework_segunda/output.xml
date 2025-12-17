@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.12.4 on darwin)" generated="2025-12-03T21:02:42.417056" rpa="false" schemaversion="5">
+<suite id="s1" name="User" source="/Users/paulooliveira/Desktop/QACODERS/academy/academy-blacklist-main/robot_framework_segunda_versao/tests/user/user.robot">
+<test id="s1-t1" name="Cadastrar usuário com confirmação de senha em branco" line="69">
+<kw name="Cadastrar usuário com confirmação de senha em branco" owner="user">
+<kw name="Gerar Usuario" owner="user">
+<kw name="Gerar primeiro nome nao composto" owner="generate_random_data">
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2025-12-03T21:02:42.944262" level="INFO">${nome_completo} = Antonella</msg>
+<var>${nome_completo}</var>
+<status status="PASS" start="2025-12-03T21:02:42.943914" elapsed="0.000403"/>
+</kw>
+<kw name="Split String" owner="String">
+<msg time="2025-12-03T21:02:42.944772" level="INFO">${nome_simples} = ['Antonella']</msg>
+<var>${nome_simples}</var>
+<arg>${nome_completo}</arg>
+<arg>${SPACE}</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.944517" elapsed="0.000404"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-03T21:02:42.945677" level="INFO">${primeiro_nome} = Antonella</msg>
+<var>${primeiro_nome}</var>
+<arg>${nome_simples[0]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.945145" elapsed="0.000565"/>
+</kw>
+<return>
+<value>${primeiro_nome}</value>
+<status status="PASS" start="2025-12-03T21:02:42.945779" elapsed="0.000060"/>
+</return>
+<msg time="2025-12-03T21:02:42.946025" level="INFO">${FIRST_NAME} = Antonella</msg>
+<var>${FIRST_NAME}</var>
+<doc>Gera primeiro nome nao composto</doc>
+<status status="PASS" start="2025-12-03T21:02:42.942730" elapsed="0.003326"/>
+</kw>
+<kw name="Gerar ultimo nome nao composto" owner="generate_random_data">
+<kw name="Last Name" owner="FakerLibrary">
+<msg time="2025-12-03T21:02:42.946776" level="INFO">${nome_completo} = Farias</msg>
+<var>${nome_completo}</var>
+<status status="PASS" start="2025-12-03T21:02:42.946619" elapsed="0.000190"/>
+</kw>
+<kw name="Split String" owner="String">
+<msg time="2025-12-03T21:02:42.947111" level="INFO">${nome_simples} = ['Farias']</msg>
+<var>${nome_simples}</var>
+<arg>${nome_completo}</arg>
+<arg>${SPACE}</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.946920" elapsed="0.000221"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-03T21:02:42.947709" level="INFO">${ultimo_nome} = Farias</msg>
+<var>${ultimo_nome}</var>
+<arg>${nome_simples[0]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.947260" elapsed="0.000481"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-03T21:02:42.948683" level="INFO">${ultimo_nome_upper} = Farias</msg>
+<var>${ultimo_nome_upper}</var>
+<arg>${ultimo_nome[0].upper()}${ultimo_nome[1:]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.947860" elapsed="0.000858"/>
+</kw>
+<return>
+<value>${ultimo_nome_upper}</value>
+<status status="PASS" start="2025-12-03T21:02:42.948783" elapsed="0.000048"/>
+</return>
+<msg time="2025-12-03T21:02:42.948980" level="INFO">${LAST_NAME} = Farias</msg>
+<var>${LAST_NAME}</var>
+<doc>Gera ultimo nome nao composto</doc>
+<status status="PASS" start="2025-12-03T21:02:42.946398" elapsed="0.002611"/>
+</kw>
+<kw name="Gerar Senha Aleatoria" owner="generate_random_data">
+<kw name="Generate Random String" owner="String">
+<msg time="2025-12-03T21:02:42.949930" level="INFO">${randomString} = 632</msg>
+<var>${randomString}</var>
+<arg>3</arg>
+<arg>[NUMBERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.949584" elapsed="0.000378"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-03T21:02:42.950261" level="INFO">${senha} = Test@632</msg>
+<var>${senha}</var>
+<arg>Test@${randomString}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.950091" elapsed="0.000204"/>
+</kw>
+<return>
+<value>${senha}</value>
+<status status="PASS" start="2025-12-03T21:02:42.950356" elapsed="0.000043"/>
+</return>
+<msg time="2025-12-03T21:02:42.950534" level="INFO">${RANDOM_PASSWORD} = Test@632</msg>
+<var>${RANDOM_PASSWORD}</var>
+<doc>Gera uma senha aleatória válida</doc>
+<status status="PASS" start="2025-12-03T21:02:42.949208" elapsed="0.001355"/>
+</kw>
+<kw name="Gerar CPF Unico" owner="generate_random_data">
+<kw name="Get Current Date" owner="DateTime">
+<msg time="2025-12-03T21:02:42.951353" level="INFO">${timestamp} = 210242951192</msg>
+<var>${timestamp}</var>
+<arg>result_format=%H%M%S%f</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.951020" elapsed="0.000370"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-03T21:02:42.951779" level="INFO">${cpf} = 21024295119</msg>
+<var>${cpf}</var>
+<arg>'${timestamp}'[:11].zfill(11)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.951524" elapsed="0.000287"/>
+</kw>
+<return>
+<value>${cpf}</value>
+<status status="PASS" start="2025-12-03T21:02:42.951871" elapsed="0.000043"/>
+</return>
+<msg time="2025-12-03T21:02:42.952047" level="INFO">${RANDOM_CPF} = 21024295119</msg>
+<var>${RANDOM_CPF}</var>
+<doc>Gera um CPF único usando timestamp</doc>
+<status status="PASS" start="2025-12-03T21:02:42.950726" elapsed="0.001350"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-12-03T21:02:42.952877" level="INFO">${FULLNAME} = Antonella Farias</msg>
+<arg>${FULLNAME}</arg>
+<arg>${FIRST_NAME} ${LAST_NAME}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.952203" elapsed="0.000731"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-12-03T21:02:42.953957" level="INFO">${EMAIL} = antonella@qacoders.com</msg>
+<arg>${EMAIL}</arg>
+<arg>${FIRST_NAME.lower()}@qacoders.com</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.953063" elapsed="0.000950"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-12-03T21:02:42.954787" level="INFO">${PASSWORD} = Test@632</msg>
+<arg>${PASSWORD}</arg>
+<arg>${RANDOM_PASSWORD}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.954141" elapsed="0.000720"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-12-03T21:02:42.956015" level="INFO">${USER_CPF} = 21024295119</msg>
+<arg>${USER_CPF}</arg>
+<arg>${RANDOM_CPF}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.955194" elapsed="0.000881"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-12-03T21:02:42.956788" level="INFO">${ACCESS_PROFILE} = ADMIN</msg>
+<arg>${ACCESS_PROFILE}</arg>
+<arg>ADMIN</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.956213" elapsed="0.000629"/>
+</kw>
+<status status="PASS" start="2025-12-03T21:02:42.942447" elapsed="0.014476"/>
+</kw>
+<kw name="Realizar login" owner="user">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-03T21:02:42.957828" level="INFO">${body} = {'mail': 'blacklist@qa.com', 'password': '1234@Test'}</msg>
+<var>${body}</var>
+<arg>mail=${USER_EMAIL}</arg>
+<arg>password=${USER_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.957444" elapsed="0.000419"/>
+</kw>
+<kw name="Criar Sessao" owner="user">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-03T21:02:42.958684" level="INFO">${headers} = {'accept': 'application/json', 'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>accept=application/json</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.958473" elapsed="0.000246"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-12-03T21:02:42.959115" level="INFO">Creating Session using : alias=develop, url=https://api-blacklist.qacoders.dev.br/api, headers={'accept': 'application/json', 'Content-Type': 'application/json'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>alias=develop</arg>
+<arg>url=${BASE_URL}</arg>
+<arg>headers=${headers}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-12-03T21:02:42.958853" elapsed="0.000492"/>
+</kw>
+<status status="PASS" start="2025-12-03T21:02:42.958133" elapsed="0.001304"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-03T21:02:44.556575" level="INFO">POST Request : url=https://api-blacklist.qacoders.dev.br/api/login 
+ path_url=/api/login 
+ headers={'User-Agent': 'python-requests/2.32.2', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'accept': 'application/json', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '53'} 
+ body=b'{"mail": "blacklist@qa.com", "password": "1234@Test"}' 
+ </msg>
+<msg time="2025-12-03T21:02:44.556717" level="INFO">POST Response : url=https://api-blacklist.qacoders.dev.br/api/login 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'Content-Length': '851', 'Content-Type': 'application/json; charset=utf-8', 'Date': 'Wed, 03 Dec 2025 21:02:22 GMT', 'Etag': 'W/"353-t+bjQtwrxWYQhYoaKdxsN/zeDts"', 'X-Powered-By': 'Express'} 
+ body={"msg":"Olá Blacklist Qa, autenticação autorizada com sucesso!","user":{"_id":"692f682a3047637d841887e5","fullName":"Blacklist Qa","mail":"blacklist@qa.com","password":"$2b$10$6FdFdqLeDrlaglzvl6S6N.dSvMRFYYJk2A/lizofeXkYOnr3WMJPq","accessProfile":"ADMIN","cpf":"78992344668","status":true,"audit":[{"registeredBy":{"userId":"68e5a18701b4c8756f5bea7f","userLogin":"diogo@sales.com"},"registrationDate":"terça-feira, 02/12/2025, 19:28:57 BRT","registrationNumber":"QaCoders-22","_id":"692f682a3047637d841887e6"}],"__v":0},"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTJmNjgyYTMwNDc2MzdkODQxODg3ZTUiLCJ1c2VySWQiOiI2OTJmNjgyYTMwNDc2MzdkODQxODg3ZTUiLCJuYW1lIjoiQmxhY2tsaXN0IFFhIiwibWFpbCI6ImJsYWNrbGlzdEBxYS5jb20iLCJhY2Nlc3NQcm9maWxlIjoiQURNSU4iLCJpYXQiOjE3NjQ3OTU3NDIsImV4cCI6MTc2NDg4MjE0Mn0.nD-1wtYMH6neONm3GMdKWrBfJfaGl4zeI4lOOwCTqXk"} 
+ </msg>
+<msg time="2025-12-03T21:02:44.556883" level="INFO">${bodyResponse} = &lt;Response [200]&gt;</msg>
+<var>${bodyResponse}</var>
+<arg>alias=develop</arg>
+<arg>url=/login</arg>
+<arg>json=${body}</arg>
+<arg>verify=${True}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-03T21:02:42.959563" elapsed="1.597362"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-03T21:02:44.557740" level="INFO">{'msg': 'Olá Blacklist Qa, autenticação autorizada com sucesso!', 'user': {'_id': '692f682a3047637d841887e5', 'fullName': 'Blacklist Qa', 'mail': 'blacklist@qa.com', 'password': '$2b$10$6FdFdqLeDrlaglzvl6S6N.dSvMRFYYJk2A/lizofeXkYOnr3WMJPq', 'accessProfile': 'ADMIN', 'cpf': '78992344668', 'status': True, 'audit': [{'registeredBy': {'userId': '68e5a18701b4c8756f5bea7f', 'userLogin': 'diogo@sales.com'}, 'registrationDate': 'terça-feira, 02/12/2025, 19:28:57 BRT', 'registrationNumber': 'QaCoders-22', '_id': '692f682a3047637d841887e6'}], '__v': 0}, 'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTJmNjgyYTMwNDc2MzdkODQxODg3ZTUiLCJ1c2VySWQiOiI2OTJmNjgyYTMwNDc2MzdkODQxODg3ZTUiLCJuYW1lIjoiQmxhY2tsaXN0IFFhIiwibWFpbCI6ImJsYWNrbGlzdEBxYS5jb20iLCJhY2Nlc3NQcm9maWxlIjoiQURNSU4iLCJpYXQiOjE3NjQ3OTU3NDIsImV4cCI6MTc2NDg4MjE0Mn0.nD-1wtYMH6neONm3GMdKWrBfJfaGl4zeI4lOOwCTqXk'}</msg>
+<arg>${bodyResponse.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-03T21:02:44.557141" elapsed="0.000682"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-03T21:02:44.558498" level="INFO">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTJmNjgyYTMwNDc2MzdkODQxODg3ZTUiLCJ1c2VySWQiOiI2OTJmNjgyYTMwNDc2MzdkODQxODg3ZTUiLCJuYW1lIjoiQmxhY2tsaXN0IFFhIiwibWFpbCI6ImJsYWNrbGlzdEBxYS5jb20iLCJhY2Nlc3NQcm9maWxlIjoiQURNSU4iLCJpYXQiOjE3NjQ3OTU3NDIsImV4cCI6MTc2NDg4MjE0Mn0.nD-1wtYMH6neONm3GMdKWrBfJfaGl4zeI4lOOwCTqXk</msg>
+<arg>${bodyResponse.json()['token']}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-03T21:02:44.557986" elapsed="0.000581"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>200</arg>
+<arg>${bodyResponse}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-12-03T21:02:44.558723" elapsed="0.000261"/>
+</kw>
+<return>
+<value>${bodyResponse.json()['token']}</value>
+<status status="PASS" start="2025-12-03T21:02:44.559066" elapsed="0.000060"/>
+</return>
+<msg time="2025-12-03T21:02:44.559672" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTJmNjgyYTMwNDc2MzdkODQxODg3ZTUiLCJ1c2VySWQiOiI2OTJmNjgyYTMwNDc2MzdkODQxODg3ZTUiLCJuYW1lIjoiQmxhY2tsaXN0IFFhIiwibWFpbCI6ImJsYWNrbGlzdEBxYS5jb20iLCJhY2N...</msg>
+<var>${TOKEN}</var>
+<status status="PASS" start="2025-12-03T21:02:42.957100" elapsed="1.602618"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-12-03T21:02:44.561307" level="INFO">${CONFIRM_PASSWORD} = </msg>
+<arg>${CONFIRM_PASSWORD}</arg>
+<arg>${EMPTY}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-12-03T21:02:44.559893" elapsed="0.001499"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-03T21:02:44.562158" level="INFO">${body} = {'fullName': 'Antonella Farias', 'mail': 'antonella@qacoders.com', 'accessProfile': 'ADMIN', 'cpf': '21024295119', 'password': 'Test@632', 'confirmPassword': ''}</msg>
+<var>${body}</var>
+<arg>fullName=${FULLNAME}</arg>
+<arg>mail=${EMAIL}</arg>
+<arg>accessProfile=${ACCESS_PROFILE}</arg>
+<arg>cpf=${USER_CPF}</arg>
+<arg>password=${PASSWORD}</arg>
+<arg>confirmPassword=${CONFIRM_PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-03T21:02:44.561580" elapsed="0.000687"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-03T21:02:46.453533" level="INFO">POST Request : url=https://api-blacklist.qacoders.dev.br/api/user?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTJmNjgyYTMwNDc2MzdkODQxODg3ZTUiLCJ1c2VySWQiOiI2OTJmNjgyYTMwNDc2MzdkODQxODg3ZTUiLCJuYW1lIjoiQmxhY2tsaXN0IFFhIiwibWFpbCI6ImJsYWNrbGlzdEBxYS5jb20iLCJhY2Nlc3NQcm9maWxlIjoiQURNSU4iLCJpYXQiOjE3NjQ3OTU3NDIsImV4cCI6MTc2NDg4MjE0Mn0.nD-1wtYMH6neONm3GMdKWrBfJfaGl4zeI4lOOwCTqXk 
+ path_url=/api/user?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTJmNjgyYTMwNDc2MzdkODQxODg3ZTUiLCJ1c2VySWQiOiI2OTJmNjgyYTMwNDc2MzdkODQxODg3ZTUiLCJuYW1lIjoiQmxhY2tsaXN0IFFhIiwibWFpbCI6ImJsYWNrbGlzdEBxYS5jb20iLCJhY2Nlc3NQcm9maWxlIjoiQURNSU4iLCJpYXQiOjE3NjQ3OTU3NDIsImV4cCI6MTc2NDg4MjE0Mn0.nD-1wtYMH6neONm3GMdKWrBfJfaGl4zeI4lOOwCTqXk 
+ headers={'User-Agent': 'python-requests/2.32.2', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'accept': 'application/json', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '161'} 
+ body=b'{"fullName": "Antonella Farias", "mail": "antonella@qacoders.com", "accessProfile": "ADMIN", "cpf": "21024295119", "password": "Test@632", "confirmPassword": ""}' 
+ </msg>
+<msg time="2025-12-03T21:02:46.453648" level="INFO">POST Response : url=https://api-blacklist.qacoders.dev.br/api/user?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTJmNjgyYTMwNDc2MzdkODQxODg3ZTUiLCJ1c2VySWQiOiI2OTJmNjgyYTMwNDc2MzdkODQxODg3ZTUiLCJuYW1lIjoiQmxhY2tsaXN0IFFhIiwibWFpbCI6ImJsYWNrbGlzdEBxYS5jb20iLCJhY2Nlc3NQcm9maWxlIjoiQURNSU4iLCJpYXQiOjE3NjQ3OTU3NDIsImV4cCI6MTc2NDg4MjE0Mn0.nD-1wtYMH6neONm3GMdKWrBfJfaGl4zeI4lOOwCTqXk 
+ status=400, reason=Bad Request 
+ headers={'Access-Control-Allow-Origin': '*', 'Content-Length': '64', 'Content-Type': 'application/json; charset=utf-8', 'Date': 'Wed, 03 Dec 2025 21:02:24 GMT', 'Etag': 'W/"40-6J8mecaFJyl75eLTcn8Y5bPgQEw"', 'X-Powered-By': 'Express'} 
+ body={"error":["O campo de confirmação de senha é obrigatório."]} 
+ </msg>
+<msg time="2025-12-03T21:02:46.453846" level="INFO">/opt/anaconda3/lib/python3.12/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api-blacklist.qacoders.dev.br'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-12-03T21:02:46.454027" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>develop</arg>
+<arg>url=/user?token=${TOKEN}</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-03T21:02:44.562445" elapsed="1.891625"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-03T21:02:46.455127" level="INFO">{'error': ['O campo de confirmação de senha é obrigatório.']}</msg>
+<arg>${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-03T21:02:46.454309" elapsed="0.000907"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()['error'][0]}</arg>
+<arg>O campo de confirmação de senha é obrigatório.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-12-03T21:02:46.455490" elapsed="0.000751"/>
+</kw>
+<status status="PASS" start="2025-12-03T21:02:42.942081" elapsed="3.514280"/>
+</kw>
+<status status="PASS" start="2025-12-03T21:02:42.941211" elapsed="3.515376"/>
+</test>
+<doc>Keywords utilizadas na rota /user</doc>
+<status status="PASS" start="2025-12-03T21:02:42.418385" elapsed="4.038741"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="User" id="s1" pass="1" fail="0" skip="0">User</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
