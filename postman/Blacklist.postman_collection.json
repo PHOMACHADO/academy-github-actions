@@ -1,0 +1,454 @@
+{
+	"info": {
+		"_postman_id": "0276ffb0-0050-4493-b214-477ac0901578",
+		"name": "Blacklist",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48341876",
+		"_collection_link": "https://pho-machado1997-9751502.postman.co/workspace/Paulo-Machado's-Workspace~eeea1067-1033-4594-8fef-bce43062e2ad/collection/48341876-0276ffb0-0050-4493-b214-477ac0901578?action=share&source=collection_link&creator=48341876"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "user_login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//const responseBody = pm.response.json();\r",
+									"\r",
+									"const status = pm.response.code;\r",
+									"\r",
+									"let loginResponse;\r",
+									"try {\r",
+									"    loginResponse = pm.response.json();\r",
+									"} catch (e) {\r",
+									"    loginResponse = {};\r",
+									"}\r",
+									"\r",
+									"pm.globals.set(\"tokenAdmin\", loginResponse.token); \r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"}); \r",
+									"\r",
+									"\r",
+									"pm.test(\"verify property token exists\", function(){ \r",
+									"    pm.expect(loginResponse.token).to.exist; \r",
+									"}); \r",
+									"\r",
+									"\r",
+									"pm.test(\"Welcome Message\", () => { \r",
+									"    pm.environment.set(\"responseMessage\", loginResponse.msg); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify ID\", () => {\r",
+									"    pm.environment.set(\"userId\", loginResponse.user._id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"{{emailAdmin}}\",\r\n  \"password\": \"{{passwordAdmin}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validate_user_token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api-blacklist.qacoders.dev.br/api/validateToken",
+							"protocol": "https",
+							"host": [
+								"api-blacklist",
+								"qacoders",
+								"dev",
+								"br"
+							],
+							"path": [
+								"api",
+								"validateToken"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "create_user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Unified post-response script for create_user_com_dados_validos",
+									"const status = pm.response.code;",
+									"",
+									"let registerResponse;",
+									"try {",
+									"    registerResponse = pm.response.json();",
+									"} catch (e) {",
+									"    registerResponse = {};",
+									"}",
+									"",
+									"const fullName = pm.variables.get(\"fullName\");",
+									"const expectedMsg = `Registro realizado com sucesso`;",
+									"",
+									"if (status === 201) {",
+									"    pm.test(\"Status code is 201\", function () {",
+									"        pm.response.to.have.status(201);",
+									"    });",
+									"    pm.test(\"Response matches 'msg' \", function () {",
+									"        pm.expect(registerResponse.msg).to.equal(expectedMsg);",
+									"    });",
+									"    pm.test(\"Response has 'fullName' \", function () {",
+									"        pm.expect(registerResponse.user?.fullName).to.exist;",
+									"    });",
+									"    pm.test(\"Response has 'mail' \", function () {",
+									"        pm.expect(registerResponse.user?.mail).to.exist;",
+									"    });",
+									"    pm.test(\"Response has 'accessProfile' \", function () {",
+									"        pm.expect(registerResponse.user?.accessProfile).to.exist;",
+									"    });",
+									"    pm.test(\"Response has 'cpf' \", function () {",
+									"        pm.expect(registerResponse.user?.cpf).to.exist;",
+									"    });",
+									"} else if (status === 403) {",
+									"    pm.test(\"Status code is 403\", function () {",
+									"        pm.response.to.have.status(403);",
+									"    });",
+									"    const expectedMsgError = `No token provided.`;",
+									"",
+									"    pm.test(\"Response matches 'errors' with the message 'No token provided.'' \", function () {",
+									"    pm.expect(registerResponse.errors[0]).to.equal(expectedMsgError);",
+									"    });",
+									"",
+									"    } else if (status === 400) {",
+									"    pm.test(\"Status code is 400\", function () {",
+									"        pm.response.to.have.status(400);",
+									"    });",
+									"",
+									"            if (pm.response.headers.get(\"Content-Type\")?.includes(\"text/html\")) {",
+									"        pm.test(\"Response is HTML due to malformed JSON\", function () {",
+									"            pm.expect(pm.response.text()).to.include(\"SyntaxError\");",
+									"        });",
+									"    } else {",
+									"",
+									"    const possibleErrors = [",
+									"        \"O campo nome completo é obrigatório.\",",
+									"        \"Informe o nome e sobrenome com as iniciais em letra maiúscula e sem caracteres especiais.\",",
+									"        \"O campo nome completo não deve conter números\",",
+									"        \"O nome completo deve ter no máximo 100 caracteres.\",",
+									"        \"O campo e-mail é obrigatório.\",",
+									"        \"O e-mail informado é inválido. Informe um e-mail no formato [nome@domínio.com].\",",
+									"        \"O campo CPF é obrigatório!\",",
+									"        \"Deve preencher o CPF com 11 dígitos\",",
+									"        \"Campo CPF deve conter apenas números\",",
+									"        \"O campo perfil de acesso deve ser preenchido de acordo com o seu cargo exemplo: ADMIN.\",",
+									"        \"O campo senha é obrigatório\",",
+									"        \"Senha precisa ter: uma letra maiúscula, uma letra minúscula, um número, um caractere especial(@#$%) e tamanho entre 8-12.\",",
+									"        \"As senhas não conferem.\",",
+									"        \"O campo de confirmação de senha é obrigatório.\"",
+									"    ];",
+									"    const errors = registerResponse.error ?? [];",
+									"    let matchedMessage = null;",
+									"    for (let err of errors) {",
+									"        if (possibleErrors.includes(err)) {",
+									"            matchedMessage = err;",
+									"            break;",
+									"        }",
+									"    }",
+									"    pm.test(`Matched error message: '${matchedMessage}'`, function () {",
+									"        pm.expect(matchedMessage, `Expected one of the possible error messages, got: ${errors.join(\", \")}`).to.not.be.null;",
+									"        pm.expect(possibleErrors).to.include(matchedMessage);",
+									"    });",
+									"    }",
+									"} else if (status === 409) {",
+									"    pm.test(\"Status code is 409\", function () {",
+									"        pm.response.to.have.status(409);",
+									"    });",
+									"",
+									"    const possible409Messages = [",
+									"        \"O cpf informado já existe em nossa base de dados.\",",
+									"        \"E-mail já cadastrado.\"",
+									"    ];",
+									"",
+									"        const alerts = registerResponse.alert ?? [];",
+									"    let matched409Message = null;",
+									"    for (let erro of alerts) {",
+									"        if (possible409Messages.includes(erro)) {",
+									"            matched409Message = erro;",
+									"            break;",
+									"        }",
+									"    }",
+									"    pm.test(`Matched error message: '${matched409Message}'`, function () {",
+									"        pm.expect(matched409Message, `Expected one of the possible error messages, got: ${alerts.join(\", \")}`).to.not.be.null;",
+									"        pm.expect(possible409Messages).to.include(matched409Message);",
+									"    });",
+									"",
+									"",
+									"} else if (status === 500) {",
+									"    pm.test(\"Status code is 500\", function () {",
+									"        pm.response.to.have.status(500);",
+									"    });",
+									"    pm.test(\"Response contains 'Erro Interno do Servidor'\", function () {",
+									"        pm.expect(",
+									"            registerResponse.alert && registerResponse.alert[0]",
+									"        ).to.include(\"Erro Interno do Servidor\");",
+									"    });",
+									"} else {",
+									"    pm.test(`Unexpected status code: ${status}`, function () {",
+									"        pm.expect([201, 400, 403, 409, 500]).to.include(status);",
+									"    });",
+									"    pm.test(\"Response body is present\", function () {",
+									"        pm.expect(registerResponse).to.be.an(\"object\");",
+									"    });",
+									"    ",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Helper functions",
+									"",
+									"// Generate a random full name: at least two words, only letters, max 100 chars",
+									"function randomFullName() {",
+									"    const firstNames = ['Ana', 'Carlos', 'Maria', 'João', 'Paulo', 'Fernanda', 'Lucas', 'Juliana', 'Pedro', 'Camila'];",
+									"    const lastNames = ['Silva', 'Souza', 'Oliveira', 'Santos', 'Pereira', 'Lima', 'Costa', 'Gomes', 'Ribeiro', 'Martins'];",
+									"    let name = firstNames[Math.floor(Math.random() * firstNames.length)] + ' ' +",
+									"        lastNames[Math.floor(Math.random() * lastNames.length)];",
+									"    // Optionally add a second last name for more complexity",
+									"    if (Math.random() > 0.5) {",
+									"        name += ' ' + lastNames[Math.floor(Math.random() * lastNames.length)];",
+									"    }",
+									"    ",
+									"    // Ensure max 100 chars and only letters/spaces",
+									"    return name.substring(0, 150).replace(/[^A-Za-zÀ-ÿ\\s]/g, '');",
+									"",
+									"}",
+									"",
+									"// Generate a valid email address",
+									"function randomEmail() {",
+									"    const names = ['ana', 'carlos', 'maria', 'joao', 'paulo', 'fernanda', 'lucas', 'juliana', 'pedro', 'camila'];",
+									"    const domains = ['gmail.com', 'hotmail.com', 'yahoo.com.br', 'outlook.com', 'empresa.com.br'];",
+									"    const name = names[Math.floor(Math.random() * names.length)] + Math.floor(Math.random() * 1000);",
+									"    const domain = domains[Math.floor(Math.random() * domains.length)];",
+									"    return `${name}@${domain}`;",
+									"}",
+									"",
+									"// Generate a password: 8-12 chars, at least one uppercase, one lowercase, one number, one special char",
+									"function randomPassword() {",
+									"    const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';",
+									"    const lower = 'abcdefghijklmnopqrstuvwxyz';",
+									"    const numbers = '0123456789';",
+									"    const specials = '@#$%';",
+									"    const all = upper + lower + numbers + specials;",
+									"    const length = Math.floor(Math.random() * 5) + 8; // 8-12",
+									"",
+									"    // Ensure at least one of each required type",
+									"    let password = '';",
+									"    password += upper[Math.floor(Math.random() * upper.length)];",
+									"    password += lower[Math.floor(Math.random() * lower.length)];",
+									"    password += numbers[Math.floor(Math.random() * numbers.length)];",
+									"    password += specials[Math.floor(Math.random() * specials.length)];",
+									"",
+									"    // Fill the rest randomly",
+									"    for (let i = 4; i < length; i++) {",
+									"        password += all[Math.floor(Math.random() * all.length)];",
+									"    }",
+									"",
+									"    // Shuffle password",
+									"    password = password.split('').sort(() => 0.5 - Math.random()).join('');",
+									"    return password;",
+									"}",
+									"",
+									"// Set variables",
+									"const fullName = randomFullName();",
+									"const mail = randomEmail();",
+									"const accessProfile = 'ADMIN'; // or 'USER', as needed",
+									"const cpf = Array.from({ length: 11 }, () => Math.floor(Math.random() * 10)).join('');",
+									"const password = randomPassword();",
+									"const confirmPassword = password; // Must match password",
+									"",
+									"pm.environment.set('fullName', fullName);",
+									"pm.environment.set('mail', mail);",
+									"pm.environment.set('accessProfile', accessProfile);",
+									"pm.environment.set('cpf', cpf);",
+									"pm.environment.set('password', password);",
+									"pm.environment.set('confirmPassword', confirmPassword);",
+									"",
+									"// Optionally log for debugging",
+									"console.log({",
+									"    fullName, mail, accessProfile, cpf, password, confirmPassword",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTM4NGI2OTJiZmYwNzg3ZmFhYmNlODgiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRrRWVYRFJYTGRiTHU4LjNSSjh6a011LjhPNHE0Qlc0WW43NDJTaXBKRmNqRTgvMFpIOFdmeSIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoidGVyw6dhLWZlaXJhLCAyNC8xMC8yMDIzLCAxOTo1NTozNyBCUlQiLCJyZWdpc3RyYXRpb25OdW1iZXIiOiIwMSIsImNvbXBhbnlJZCI6IlFhLkNvZGVycyIsIl9pZCI6IjY1Mzg0YjY5MmJmZjA3ODdmYWFiY2U4OSJ9XSwiX192IjowLCJpYXQiOjE3MDA2OTM0NTUsImV4cCI6MTcwMDc3OTg1NX0.VtaA30s4kw5ft51ldSryHsoDJG3ZoBDW6drZOwT-Jh0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{mail}}\",\r\n  \"accessProfile\": \"{{accessProfile}}\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"password\": \"{{password}}\",\r\n  \"confirmPassword\": \"{{confirmPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{tokenAdmin}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
